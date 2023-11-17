@@ -1,0 +1,35 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.toastify{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 32px;
+    background-color: green;
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+    position: fixed;
+    top: -100px;
+    animation: toastAnimation 5s ease;
+}
+
+.toastify p{
+    font-size: 12px;
+    color: white;
+}
+
+@keyframes toastAnimation{
+    0%, 100%{
+        position: fixed;
+        top: -100px;
+    }
+    50%{
+        top: 50px;
+    }
+}
