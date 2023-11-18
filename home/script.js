@@ -4,16 +4,22 @@ const user = localStorage.getItem("@user-exemplo");
 const main = document.querySelector("main");
 const form = document.querySelector("form");
 
-form.insertAdjacentHTML('afterbegin', `
-    <select name="" id="select-produtos">
-        <option value="0">Selecione</option>
+
+carregarProdutos();
+
+async function carregarProdutos(){
+    
+    const dados = await fetch("http://localhost:3001/produto");
+    
+    const dadosJson = await dados.json();
+    //console.log(dadosJson);
+
+    dadosJson.forEach((item)=>{
         
-      
-            for(let i=0; i < produtosJson.length; i++){
-        
-            <option value=""></option>
-           
-        }
-        
-    </select>
-`)
+        form.insertAdjacentHTML('beforebegin',`
+        <select name="" id="select-produtos">
+            <option value="${item.id}">${item.descricao}</option>
+        </select>
+        `);
+    })
+}
