@@ -3,7 +3,6 @@ export function toastify(message, situation){
 
     main.insertAdjacentHTML("afterbegin",`
     <div class="toastify">
-        <img src="./imgs/checkbox-circle-line.png" alt="">
         <p>${message}</p>
     </div>
     `)

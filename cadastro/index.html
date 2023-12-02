@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,19 +12,23 @@
 <body>
     <main>
         <form method="post">
-            <label for="inp-nome">Nome</label>
-            <input type="text" id="inp-nome">
+           
+            <div id="div-inputs">
+                <input type="text" id="inp-nome" placeholder="Nome">
 
-            <label for="inp-email">E-mail</label>
-            <input type="email" id="inp-email">
+                <input type="email" id="inp-email" placeholder="E-mail">
 
-            <label for="inp-senha">Senha</label>
-            <input type="password" id="inp-senha">
-
-            <p>Já possui um cadastro?</p>
-            <a href="../">Voltar</a>
-
+                <input type="password" id="inp-senha" placeholder="Senha">
+            </div>
+            
             <button type="submit" id="btn-cadastrar">Cadastrar</button>
+
+            <div id="info-cad">
+                <p>Já possui um cadastro?</p>
+                <a href="../">Voltar</a>
+            </div>
+            
+            
         </form>
     </main>
 </body>

@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+
+
+button{
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: none;
+    padding: 4px 6px;
+    text-transform: uppercase;
+}
+
+.modal-src{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: animationModal 2s linear;
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 40px 38px;
+    border-radius: 16px;
+    background-color: #ffff;
+    gap: 10px;
+}
+
+.modal button{
+    position: absolute;
+    top: 0;
+    margin-left: 180px;
+}
+
+@keyframes animationModal{
+    0%{
+        margin-bottom: 500px;
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+        margin-bottom: 0;
+    }
+}

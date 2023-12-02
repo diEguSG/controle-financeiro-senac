@@ -1,50 +1,15 @@
-//import {toastify} from '../../toastify.js';
+import {toastifyProdutos} from './toastifyProdutos.js';
 
 carregarProdutos();
-atualizarProduto();
-
-const form = document.querySelector("form");
-const main = document.querySelector("main")
-const ul = document.createElement('ul')
-main.appendChild(ul);
-const ulProdutos = document.querySelector("ul");
-
-form.addEventListener('submit', (event)=>{
-    event.preventDefault();
-    cadastrarProduto();
-    
-})
 
 const myHeaders = {
     "Content-Type": "application/json"
 }
 
-async function cadastrarProduto(){
-
-    const produtos = {
-        descricao: document.querySelector("#inp-descricao").value,
-        valorCusto: document.querySelector("#inp-valor-custo").value,
-        valorVenda: document.querySelector("#inp-valor-venda").value,
-        situacao: 2
-    }
-
-    const produtosJson = JSON.stringify(produtos);
-
-    console.log(produtosJson);
-
-    const res = await fetch("http://localhost:3001/produto", 
-    {
-        headers: myHeaders,
-        method: "POST",
-        body: produtosJson
-    })
-
-    console.log(res);
-
-    if(res.status == 201){
-        
-    }
-}
+const main = document.querySelector("main")
+const ul = document.createElement('ul')
+main.appendChild(ul);
+const ulProdutos = document.querySelector("ul");
 
 async function carregarProdutos(){
     
@@ -54,22 +19,44 @@ async function carregarProdutos(){
 
     dadosJson.forEach((item)=>{
         
-        ulProdutos.insertAdjacentHTML('beforebegin',`
-    
+        ulProdutos.insertAdjacentHTML('beforebegin',` 
             <li>
-                <form>
+                <form id="form-info-produtos">
                     <div class="div-information">
                         <p id="p-descricao">Descrição: ${item.descricao}</p>
                         <p id="p-valor-custo">Valor Custo: ${item.valorCusto}</p>
                         <p id="p-valor-venda">Valor Venda: ${item.valorVenda}</p>
+                        
+                        
 
                         <input type="hidden" id="inp-id-produto" value="${item.id}">
+                        <button type="submit" id="btn-excluir${item.id}">
+                            <img src="https://img.icons8.com/?size=48&id=FgOBVsURv5ar&format=png" alt="excluir" >
+                        </button>
                         <button id="btn-editar-produto">Editar</button>
                     </div>
                 </form>
             </li>
         `);
+        const btnExcluir = document.getElementById(`btn-excluir${item.id}`)
+
+        btnExcluir.addEventListener('click', ()=>{
+            console.log("CLICOU")       
+            excluirProduto();
+    
+        })
     })
+
+    main.insertAdjacentHTML("beforeend", `
+        <button id="btn-abrir-cadastro">Cadastro Produto</button>
+    `);
+
+    const btnAbrirCadastro = document.querySelector("#btn-abrir-cadastro");
+
+        btnAbrirCadastro.addEventListener('click', ()=>{
+            toastifyProdutos();
+        });
+ 
 }
 
 async function atualizarProduto(){
@@ -102,4 +89,27 @@ async function atualizarProduto(){
         situacao: 2
     }
     
+}
+
+async function excluirProduto(){
+    
+    const idProduto = document.querySelector("#inp-id-produto").value;
+    const situacao = {
+        situacao: 1
+    }
+
+    const situacaoJson = JSON.stringify(situacao);
+
+    console.log(idProduto);
+
+    const res = await fetch(`http://localhost:3001/produto/${idProduto}`, 
+    {
+        headers: myHeaders,
+        method: "PATCH",
+        body: situacaoJson
+    });
+
+    console.log(res);
+    
+    //const dadosJson = await dados.json();
 }

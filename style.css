@@ -12,14 +12,60 @@ main{
     width: 100%;
 }
 
-
 form{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    
+    padding: 25px 40px;
+    border-radius: 10px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 30px 42px;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    filter: drop-shadow(10px 10px 5px gray);
 }
+
+input{
+    outline: none;
+    border-style: none none solid none;
+    border-width: 1px;
+    width: 300px;
+    height: 30px;  
+}
+
+input:hover{
+    opacity: 80%;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+}
+
+#div-inputs{
+    gap: 8px;
+}
+
+#info-cad{
+    margin-top: 10px;
+}
+
+button{
+    margin-top: 10px;
+    border: none;
+    width: 300px;
+    cursor: pointer;
+    padding: 8px;
+    text-transform: uppercase;
+    background-color: #55ade7;
+    color: white;
+}
+
 
 .toastify{
     display: flex;
@@ -38,6 +84,10 @@ form{
 .toastify p{
     font-size: 12px;
     color: white;
+}
+
+.error{
+    background-color: red;
 }
 
 @keyframes toastAnimation{
