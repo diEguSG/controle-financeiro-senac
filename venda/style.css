@@ -1,54 +1,35 @@
 *{
     margin: 0;
+    border-style: none;
     padding: 0;
-    box-sizing: 0;
-}
-
-li{
-    list-style: none;
 }
 
 main{
-    height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
+    height: 100vh;
 }
 
 form{
     display: flex;
     flex-direction: column;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
     align-items: center;
     justify-content: center;
-    padding: 42px 46px;
-    background-color: #67c9e7;
-    border-radius: 12px;
-    filter: drop-shadow(10px 10px 5px gray);
+    padding: 20px 20px;
 }
 
 
-
-input{
-    outline: none;
-    padding-left: 10px;
-    text-align: center;
-}
-
-main div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
-    gap: 5px;
-    font-family: 'Inconsolata', monospace;
+input, select{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
 }
 
 button{
     cursor: pointer;
-    margin-top: 10px;
-    border-radius: 6px;
-    border: none;
-    padding: 4px 6px;
-    text-transform: uppercase;
 }

@@ -10,18 +10,23 @@ infos();
 
 async function infos(){
 
-    const dadosProdutos = await fetch("http://localhost:3001/produto");
+    const dadosProdutos = await fetch("http://localhost:3001/produto?situacao=2");
 
     const dadosProdutosJson = await dadosProdutos.json();
     
     main.insertAdjacentHTML("afterbegin", `
         <form method="post">
-            <label for="slc-produto">Produto</label>
-            <select name="" id="slc-produto">
-            </select>
+            
+            <div>
+                <label for="slc-produto">Produto</label>
+                <select name="" id="slc-produto">
+                </select>
+            </div>
 
-            <label for="inp-quantidade">Quantidade</label>
-            <input type=number id="inp-quantidade">
+            <div>
+                <label for="inp-quantidade">Quantidade</label>
+                <input type=number id="inp-quantidade">
+            </div>
 
             <button id="btn-cad-venda">Salvar</button>
         </form>

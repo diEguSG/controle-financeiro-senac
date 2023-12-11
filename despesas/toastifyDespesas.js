@@ -1,3 +1,5 @@
+import {baseURL} from "../api.js";
+
 const myHeaders = {
     "Content-Type": "application/json"
 }
@@ -25,7 +27,6 @@ export function toastifyDespesas(){
 
     form.addEventListener('submit', (event)=>{
         event.preventDefault();
-        console.log("============> CHEGOU!!")
         cadastrarDespesa();
     })
 
@@ -59,7 +60,7 @@ async function cadastrarDespesa(){
 
     console.log(despesasJson);
 
-    const res = await fetch("http://localhost:3001/despesa", 
+    const res = await fetch(`${baseURL}/despesa`, 
     {
         headers: myHeaders,
         method: "POST",

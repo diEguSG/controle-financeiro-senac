@@ -1,4 +1,5 @@
 import {toastifyProdutos} from './toastifyProdutos.js';
+import {baseURL} from "../api.js";
 
 carregarProdutos();
 
@@ -13,7 +14,7 @@ const ulProdutos = document.querySelector("ul");
 
 async function carregarProdutos(){
     
-    const dados = await fetch("http://localhost:3001/produto?situacao=2");
+    const dados = await fetch(`${baseURL}/produto?situacao=2`);
     
     const dadosJson = await dados.json();
 
@@ -61,7 +62,7 @@ async function carregarProdutos(){
 
 async function atualizarProduto(){
 
-    const dados = await fetch("http://localhost:3001/produto?situacao=2");
+    const dados = await fetch(`${baseURL}/produto?situacao=2`);
     
     const dadosJson = await dados.json();
 
@@ -102,7 +103,7 @@ async function excluirProduto(){
 
     console.log(idProduto);
 
-    const res = await fetch(`http://localhost:3001/produto/${idProduto}`, 
+    const res = await fetch(`${baseURL}/produto/${idProduto}`, 
     {
         headers: myHeaders,
         method: "PATCH",

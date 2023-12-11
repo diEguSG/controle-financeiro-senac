@@ -1,4 +1,5 @@
 import {toastify} from "../toastify.js";
+import {baseURL} from "../api.js";
 
 const form = document.querySelector("form");
 
@@ -20,7 +21,7 @@ async function cadastro(){
 
     const userJson = JSON.stringify(user);
     
-    const res = await fetch("http://localhost:3001/register",
+    const res = await fetch(`${baseURL}/register`,
     {
         headers: myHeaders,
         method: "POST",

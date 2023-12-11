@@ -1,3 +1,5 @@
+import {baseURL} from "../api.js";
+
 const main = document.querySelector("main");
 const ul = document.createElement('ul')
 main.appendChild(ul);
@@ -17,11 +19,11 @@ function dataAtual(){
     }
 
     main.insertAdjacentHTML("afterbegin", `
-        <input type="date" name="" value=${ano + "-" + mes + "-" + dia} id="filtro-data">
+        <input type="date" name="" value=${ano + "-" + mes + "-" + "01"} id="filtro-data-inicial">
+        <input type="date" name="" value=${ano + "-" + mes + "-" + dia} id="filtro-data-final">
         <button id="btn-carregar-info">Carregar</button>
     `)
-    const teste = document.querySelector("#filtro-data").value;
-    console.log(teste)
+    
 
 }
 
@@ -30,55 +32,118 @@ function atualizaData(){
     const btnAlterarData = document.querySelector("#btn-carregar-info");
 
     btnAlterarData.addEventListener('click', ()=>{
-        const data = document.querySelector("#filtro-data").value;
-        
-        const ano = data.slice(0, 4)
-        const mes = data.slice(5, 7)
-        const dia = data.slice(8, 10)
+        const dataInicial = document.querySelector("#filtro-data-inicial").value;
+        const dataFinal = document.querySelector("#filtro-data-final").value;
 
-        carregarVendas(ano, mes, dia)
+        const anoFinal = dataFinal.slice(0, 4)
+        const mesFinal = dataFinal.slice(5, 7)
+        const diaFinal = dataFinal.slice(8, 10)
+
+        const anoInicial = dataInicial.slice(0, 4)
+        const mesInicial = dataInicial.slice(5, 7)
+        const diaInicial = dataInicial.slice(8, 10)
+
+        carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFinal, diaInicial)
 
     })
 }
 
-async function carregarVendas(ano, mes, dia){
+async function carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFinal, diaInicial){
 
-    const dadosAnual = await fetch(`http://localhost:3001/venda?ano=${ano}`)
+    const dadosMesFinal = await fetch(`${baseURL}/venda?ano=${mesFinal}`)
+    const dadosMesInicial = await fetch(`${baseURL}/venda?ano=${mesInicial}`)
 
-    const dadosAnualJson = await dadosAnual.json();
-
-    console.log(dadosAnualJson)
+    const dadosMesFinalJson = await dadosMesFinal.json();
+    const dadosMesInicialJson = await dadosMesInicial.json();
 
     let dados = []; 
-    for(let i = 0; i < dadosAnualJson.length; i++){
-        if(dadosAnualJson[i].mes == mes){
-            if(dadosAnualJson[i].dia == dia){     
-                dados.push(dadosAnualJson[i]) 
+    if(anoFinal - anoInicial == 0){
+        const dadosAnual = await fetch(`${baseURL}/venda?ano=${anoFinal}`);
+        const dadosAnualJson = await dadosAnual.json();
+
+        if(mesFinal - mesInicial == 0){
+            for(let i = 0; i < dadosAnualJson.length; i++){
+                if(dadosAnualJson[i].mes == mesFinal){
+                    if(dadosAnualJson[i].dia == diaFinal){     
+                        dados.push(dadosAnualJson[i]) 
+                    }
+                }
+            }
+        }else{
+            for(let i = mesInicial; i <= mesFinal; i++){
+                for(let j = 0; j < dadosAnualJson.length; j++){
+                    if(dadosAnualJson[j].mes == i){  
+                        dados.push(dadosAnualJson[j])     
+                    }
+                }
             }
         }
     }
+    else{
+        for(let i = anoInicial; i <= anoFinal; i++){
+            const dadosAnual = await fetch(`${baseURL}/venda?ano=${i}`);
+            const dadosAnualJson = await dadosAnual.json();  
+                
+
+            if(mesFinal - mesInicial == 0){
+                for(let i = 0; i < dadosAnualJson.length; i++){
+                    if(dadosAnualJson[i].mes == mesFinal){
+                        if(dadosAnualJson[i].dia == diaFinal){     
+                            dados.push(dadosAnualJson[i]) 
+                        }
+                    }
+                }
+            }else{
+                for(let i = mesInicial; i <= mesFinal; i++){
+                    for(let j = 0; j < dadosAnualJson.length; j++){
+                        if(dadosAnualJson[j].mes == i){  
+                            dados.push(dadosAnualJson[j])  
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    console.log(dados);
+    
+    dados.sort((a,b)=>{
+        console.log(a.id, b.id);
+
+        return a.id - b.id;
+    })
+    
     console.log(dados)
 
     ulVendas.innerHTML = '';
 
+    ulVendas.insertAdjacentHTML("beforeend", `
+        <table>
+            <tr>
+                <th>Nº Venda</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Valor Total</th>
+                <th>Data</th>
+            </tr>
+        </table>
+    `);
+
+    const table = document.querySelector("table");
+
     dados.forEach(async (item)=>{
 
-        const produto = await fetch(`http://localhost:3001/produto?id=${item.id}`);
+        const produto = await fetch(`${baseURL}/produto?id=${item.id_produto}`);
         const produtoJson = await produto.json();
         
-        ulVendas.insertAdjacentHTML('beforeend',` 
-            <li>
-                <form>
-                    <div class="div-information">
-                        <p id="p-descricao">Descrição: ${produtoJson[0].descricao}</p>
-                        <p id="p-quantidade-">Quantidade: ${item.quantidade}</p>
-                        <p id="p-valor-total">Valor Total: ${item.valorTotal}</p>
-                        <p id="p-data">Data: ${item.dia}/${item.mes}/${item.ano}</p>
-
-                        <input type="hidden" id="inp-id-produto" value="${item.id}">
-                    </div>
-                </form>
-            </li>
+        table.insertAdjacentHTML('beforeend',`  
+            <tr>
+                <td>${item.id}</td>
+                <td>${produtoJson[0].descricao}</td>
+                <td>${item.quantidade}</td>
+                <td>${item.valorTotal}</td>
+                <td>${item.dia}/${item.mes}/${item.ano}</td>
+            </tr>
         `);   
     })        
 }

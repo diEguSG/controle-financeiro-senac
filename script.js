@@ -1,4 +1,5 @@
 import {toastify} from "./toastify.js";
+import {baseURL} from "./api.js";
 
 const form = document.querySelector("form");
 
@@ -19,7 +20,7 @@ async function login(){
 
     const userJson = JSON.stringify(user);
     
-    const res = await fetch("http://localhost:3001/login",
+    const res = await fetch(`${baseURL}/login`,
     {
         headers: myHeaders,
         method: "POST",

@@ -1,3 +1,5 @@
+import {baseURL} from "../api.js";
+
 const myHeaders = {
     "Content-Type": "application/json"
 }
@@ -51,7 +53,7 @@ async function cadastrarProduto(){
 
     console.log(produtosJson);
 
-    const res = await fetch("http://localhost:3001/produto", 
+    const res = await fetch(`${baseURL}/produto`, 
     {
         headers: myHeaders,
         method: "POST",

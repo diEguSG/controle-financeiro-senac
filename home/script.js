@@ -1,3 +1,5 @@
+import {baseURL} from "../api.js";
+
 const token = localStorage.getItem("@token-exemplo");
 const user = localStorage.getItem("@user-exemplo");
 
@@ -9,7 +11,7 @@ carregarProdutos();
 
 async function carregarProdutos(){
     
-    const dados = await fetch("http://localhost:3001/produto");
+    const dados = await fetch(`${baseURL}/produto`);
     
     const dadosJson = await dados.json();
     //console.log(dadosJson);

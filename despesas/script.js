@@ -1,4 +1,5 @@
 import {toastifyDespesas} from './toastifyDespesas.js';
+import {baseURL} from "../api.js";
 
 carregarDespesas();
 
@@ -10,7 +11,7 @@ const ulDespesas = document.querySelector("ul");
 
 async function carregarDespesas(){
     
-    const dados = await fetch("http://localhost:3001/despesa");
+    const dados = await fetch(`${baseURL}/despesa`);
     
     const dadosJson = await dados.json();
 
