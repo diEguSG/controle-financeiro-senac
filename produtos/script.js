@@ -20,7 +20,7 @@ async function carregarProdutos(){
 
     dadosJson.forEach((item)=>{
         
-        ulProdutos.insertAdjacentHTML('beforeend',` 
+        ulProdutos.insertAdjacentHTML("beforeend",` 
             <li>
                 <form id="form-info-produtos">
                     <div class="div-information">
@@ -41,13 +41,12 @@ async function carregarProdutos(){
         `);
         const btnExcluir = document.getElementById(`btn-excluir${item.id}`)
 
-        btnExcluir.addEventListener('click', ()=>{
-            console.log("CLICOU")       
+        btnExcluir.addEventListener('click', ()=>{    
             excluirProduto();
         })
     })
 
-    main.insertAdjacentHTML("beforebegin", `
+    main.insertAdjacentHTML("afterbegin", `
         <button id="btn-abrir-cadastro">Cadastro Produto</button>
     `);
 

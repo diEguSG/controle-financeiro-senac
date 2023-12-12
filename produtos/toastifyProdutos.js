@@ -6,7 +6,7 @@ const myHeaders = {
 
 export function toastifyProdutos(){
 
-    const main  = document.querySelector("main");
+    const main = document.querySelector("main");
 
     main.insertAdjacentHTML("afterbegin",`
     <div class=modal-src>
@@ -35,9 +35,9 @@ export function toastifyProdutos(){
 
     const btnFecharModal = document.querySelector('#btn-fechar-modal');
 
-    btnFecharModal.addEventListener('click', (event)=>{
-        const modal = document.querySelector('.modal-src')
-        event.remove(main);
+    btnFecharModal.addEventListener('click', ()=>{
+        const modal = document.querySelector(".modal-src")
+        modal.remove();
     })    
 }
 

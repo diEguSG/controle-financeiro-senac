@@ -32,9 +32,9 @@ export function toastifyDespesas(){
 
     const btnFecharModal = document.querySelector('#btn-fechar-modal');
 
-    btnFecharModal.addEventListener('click', (event)=>{
-        const modal = document.querySelector('.modal-src')
-        event.remove(main);
+    btnFecharModal.addEventListener('click', ()=>{
+        const modal = document.querySelector(".modal-src")
+        modal.remove();
     })
 
     
