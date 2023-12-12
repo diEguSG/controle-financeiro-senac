@@ -15,7 +15,7 @@ async function carregarDespesas(){
     const mes = data.getMonth() + 1;
     const ano = data.getFullYear();
 
-    const dados = await fetch(`${baseURL}/despesa?mes=${ano}`);
+    const dados = await fetch(`${baseURL}/despesa?ano=${ano}`);
     
     const dadosJson = await dados.json();
 
@@ -23,15 +23,16 @@ async function carregarDespesas(){
     const dadosVenda = [];
     for(let i = 0; i < dadosJson.length; i++){
         if(dadosJson[i].mes == mes){
-            dadosVenda.push(dadosAnualJson[i]);
+            dadosVenda.push(dadosJson[i]);
         }
     }
 
     dadosVenda.forEach((item)=>{
         
-        ulDespesas.insertAdjacentHTML('beforebegin',` 
+        ulDespesas.insertAdjacentHTML('beforeend',` 
             <li>
                 <div class="div-information">
+                    <h3>Despesas Mensal</h3>
                     <p id="p-descricao">Descrição: ${item.descricao}</p>
                     <p id="p-valorDespesa">Valor: ${item.valorDespesa}</p>
                     <p id="p-data">Data: ${item.dia}/${item.mes}/${item.ano}</p>
@@ -40,7 +41,7 @@ async function carregarDespesas(){
         `);
     })
 
-    main.insertAdjacentHTML("beforeend", `
+    main.insertAdjacentHTML("afterbegin", `
         <button id="btn-abrir-cadastro">Cadastro Despesas</button>
     `);
 

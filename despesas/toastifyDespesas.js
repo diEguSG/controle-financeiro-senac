@@ -58,8 +58,6 @@ async function cadastrarDespesa(){
 
     const despesasJson = JSON.stringify(despesas);
 
-    console.log(despesasJson);
-
     const res = await fetch(`${baseURL}/despesa`, 
     {
         headers: myHeaders,

@@ -6,8 +6,6 @@ const myHeaders = {
 
 infos();
 
-
-
 async function infos(){
 
     const dadosProdutos = await fetch("http://localhost:3001/produto?situacao=2");
