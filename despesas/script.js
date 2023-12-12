@@ -11,11 +11,23 @@ const ulDespesas = document.querySelector("ul");
 
 async function carregarDespesas(){
     
-    const dados = await fetch(`${baseURL}/despesa`);
+    const data = new Date();
+    const mes = data.getMonth() + 1;
+    const ano = data.getFullYear();
+
+    const dados = await fetch(`${baseURL}/despesa?mes=${ano}`);
     
     const dadosJson = await dados.json();
 
-    dadosJson.forEach((item)=>{
+
+    const dadosVenda = [];
+    for(let i = 0; i < dadosJson.length; i++){
+        if(dadosJson[i].mes == mes){
+            dadosVenda.push(dadosAnualJson[i]);
+        }
+    }
+
+    dadosVenda.forEach((item)=>{
         
         ulDespesas.insertAdjacentHTML('beforebegin',` 
             <li>

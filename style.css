@@ -13,13 +13,6 @@ main{
 }
 
 form{
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    padding: 25px 40px;
-    border-radius: 10px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,7 +55,7 @@ button{
     cursor: pointer;
     padding: 8px;
     text-transform: uppercase;
-    background-color: #55ade7;
+    background-color: #f55353;
     color: white;
 }
 

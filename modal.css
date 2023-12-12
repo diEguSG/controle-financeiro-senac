@@ -38,10 +38,11 @@ button{
     gap: 10px;
 }
 
-.modal button{
+#btn-fechar-modal{
     position: absolute;
     top: 0;
-    margin-left: 180px;
+    margin-top: 290px;
+    margin-left: 200px;
 }
 
 @keyframes animationModal{
