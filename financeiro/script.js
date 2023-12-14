@@ -1,3 +1,7 @@
+import {validarUsuario} from "../validarUsuario.js";
+
+validarUsuario();
+
 import {baseURL} from "../api.js";
 
 const main = document.querySelector("main");
@@ -23,8 +27,6 @@ function dataAtual(){
         <input type="date" name="" value=${ano + "-" + mes + "-" + dia} id="filtro-data-final">
         <button id="btn-carregar-info">Carregar</button>
     `)
-    
-
 }
 
 function atualizaData(){
@@ -149,7 +151,8 @@ async function carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFin
         valorVendas += dados[i].valorTotal;
     
         if(i == (dados.length - 1)){
-            // console.log(valorVendas);
+            
+            console.log(valorVendas);
             console.log(lucro);
         }
     }

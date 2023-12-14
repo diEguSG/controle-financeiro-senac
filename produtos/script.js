@@ -1,4 +1,7 @@
-import {toastifyProdutos} from './toastifyProdutos.js';
+import {validarUsuario} from "../validarUsuario.js";
+
+validarUsuario();
+
 import {baseURL} from "../api.js";
 
 carregarProdutos();
@@ -7,6 +10,7 @@ const myHeaders = {
     "Content-Type": "application/json"
 }
 
+const nav = document.querySelector("nav")
 const main = document.querySelector("main")
 const ul = document.createElement('ul')
 main.appendChild(ul);
@@ -20,20 +24,17 @@ async function carregarProdutos(){
 
     dadosJson.forEach((item)=>{
         
-        ulProdutos.insertAdjacentHTML("beforebegin",` 
+        ulProdutos.insertAdjacentHTML("beforeend",` 
             <li>
-                <form>
-                    <div class="div-information">
+                <form class="form-produtos">
+                    <div class="div-produtos">
+                        <button type="submit" id="btn-excluir${item.id}">
+                            <img src="https://img.icons8.com/?size=48&id=FgOBVsURv5ar&format=png" alt="excluir" >
+                        </button>
                         <p id="p-descricao">Descrição: ${item.descricao}</p>
                         <p id="p-valor-custo">Valor Custo: ${item.valorCusto}</p>
                         <p id="p-valor-venda">Valor Venda: ${item.valorVenda}</p>
                         
-                        
-
-                        <input type="hidden" id="inp-id-produto" value="${item.id}">
-                        <button type="submit" id="btn-excluir${item.id}">
-                            <img src="https://img.icons8.com/?size=48&id=FgOBVsURv5ar&format=png" alt="excluir" >
-                        </button>
                         <button id="btn-editar-produto">Editar</button>
                     </div>
                 </form>
@@ -46,15 +47,24 @@ async function carregarProdutos(){
         })
     })
 
-    main.insertAdjacentHTML("afterbegin", `
-        <button id="btn-abrir-cadastro">Cadastro Produto</button>
+    nav.insertAdjacentHTML("afterbegin", `
+        <ul>
+            <li>
+                <a id="btn-aba-produtos" class="btn-nav-produtos">Produtos</a>
+            </li>
+            <li>
+                <a id="btn-abrir-cadastro" class="btn-nav-produtos">Cadastro Produto</a>
+            </li>
+        </ul>
     `);
 
     const btnAbrirCadastro = document.querySelector("#btn-abrir-cadastro");
 
-        btnAbrirCadastro.addEventListener('click', ()=>{
-            toastifyProdutos();
-        });
+    btnAbrirCadastro.addEventListener('click', ()=>{
+        setTimeout(()=>{
+            window.location.replace("/produtos/cadastroProdutos/index.html");
+        }, 300);
+    });
  
 }
 
