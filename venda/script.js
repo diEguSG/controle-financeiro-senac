@@ -1,3 +1,5 @@
+import {baseURL} from "./api.js";
+
 const main = document.querySelector("main");
 
 const myHeaders = {
@@ -8,7 +10,7 @@ infos();
 
 async function infos(){
 
-    const dadosProdutos = await fetch("http://localhost:3001/produto?situacao=2");
+    const dadosProdutos = await fetch(`${baseURL}/produto?situacao=2`);
 
     const dadosProdutosJson = await dadosProdutos.json();
     
@@ -44,7 +46,7 @@ async function infos(){
 
         const idProduto = document.querySelector("#slc-produto").value;
         
-        const dadosProduto = await fetch(`http://localhost:3001/produto/${idProduto}`);
+        const dadosProduto = await fetch(`${baseURL}/produto/${idProduto}`);
         const dadosProdutoJson = await dadosProduto.json();
 
         const quantidade = document.querySelector("#inp-quantidade").value;
@@ -65,7 +67,7 @@ async function infos(){
 
         const infoJson = JSON.stringify(infoVenda);
 
-        const res = await fetch("http://localhost:3001/venda",
+        const res = await fetch(`${baseURL}/venda`,
         {
             headers: myHeaders,
             method: "POST",
