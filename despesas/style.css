@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+li{
+    list-style: none;
+    cursor: pointer;
+}
+
+.div-produtos{
+    
+}
+
+#btn-fechar-modal{
+    position: absolute;
+    top: 0;
+    margin-top: 260px;
+    margin-left: 200px;
+}

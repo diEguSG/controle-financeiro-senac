@@ -31,12 +31,12 @@ async function carregarDespesas(){
         
         ulDespesas.insertAdjacentHTML('beforeend',` 
             <li>
-                <div class="div-information">
+                <div class="div-despesas">
                     <h3>Despesas Mensal</h3>
                     <p id="p-descricao">Descrição: ${item.descricao}</p>
                     <p id="p-valorDespesa">Valor: ${item.valorDespesa}</p>
                     <p id="p-data">Data: ${item.dia}/${item.mes}/${item.ano}</p>
-                </div>     
+                </div>    
             </li>
         `);
     })
@@ -45,9 +45,10 @@ async function carregarDespesas(){
         <button id="btn-abrir-cadastro">Cadastro Despesas</button>
     `);
 
+    const divDespesas = document.querySelector(".div-despesas");
     const btnAbrirCadastro = document.querySelector("#btn-abrir-cadastro");
 
     btnAbrirCadastro.addEventListener('click', ()=>{
-        toastifyDespesas();
+        toastifyDespesas(divDespesas, btnAbrirCadastro);
     })
 }

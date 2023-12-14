@@ -4,7 +4,7 @@ const myHeaders = {
     "Content-Type": "application/json"
 }
 
-export function toastifyDespesas(){
+export function toastifyDespesas(divDespesas, btnAbrirCadastro){
 
     const main  = document.querySelector("main");
 
@@ -23,6 +23,8 @@ export function toastifyDespesas(){
     </div>
     `)
 
+    alterarDisplay(divDespesas, btnAbrirCadastro);
+
     const form = document.querySelector('#modal');
 
     form.addEventListener('submit', (event)=>{
@@ -35,6 +37,7 @@ export function toastifyDespesas(){
     btnFecharModal.addEventListener('click', ()=>{
         const modal = document.querySelector(".modal-src")
         modal.remove();
+        alterarDisplay(divDespesas, btnAbrirCadastro);
     })
 
     
@@ -69,5 +72,19 @@ async function cadastrarDespesa(){
 
     if(res.status == 201){
         
+    }
+}
+
+
+function alterarDisplay(divDespesas, btnAbrirCadastro){
+
+    if(window.getComputedStyle(divDespesas, null).display == "block"){
+        divDespesas.style.display = "none";
+        btnAbrirCadastro.style.display = "none";
+        
+    }
+    else if(window.getComputedStyle(divDespesas, null).display == "none"){
+        divDespesas.style.display = "block";
+        btnAbrirCadastro.style.display = "inline-block";
     }
 }

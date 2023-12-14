@@ -4,9 +4,10 @@ const myHeaders = {
     "Content-Type": "application/json"
 }
 
-export function toastifyProdutos(){
+export function toastifyProdutos(formProdutos, btnAbrirCadastro){
 
     const main = document.querySelector("main");
+    
 
     main.insertAdjacentHTML("afterbegin",`
     <div class=modal-src>
@@ -26,6 +27,8 @@ export function toastifyProdutos(){
     </div>
     `)
 
+    alterarDisplay(formProdutos, btnAbrirCadastro);
+
     const form = document.querySelector('#modal');
 
     form.addEventListener('submit', (event)=>{
@@ -38,6 +41,7 @@ export function toastifyProdutos(){
     btnFecharModal.addEventListener('click', ()=>{
         const modal = document.querySelector(".modal-src")
         modal.remove();
+        alterarDisplay(formProdutos, btnAbrirCadastro);
     })    
 }
 
@@ -64,5 +68,20 @@ async function cadastrarProduto(){
 
     if(res.status == 201){
         
+    }
+}
+
+
+function alterarDisplay(formProdutos, btnAbrirCadastro){
+    
+
+    if(window.getComputedStyle(formProdutos, null).display == "block"){
+        formProdutos.style.display = "none";
+        btnAbrirCadastro.style.display = "none";
+        
+    }
+    else if(window.getComputedStyle(formProdutos, null).display == "none"){
+        formProdutos.style.display = "block";
+        btnAbrirCadastro.style.display = "inline-block";
     }
 }
