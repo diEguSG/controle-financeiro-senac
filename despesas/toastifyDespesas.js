@@ -15,7 +15,7 @@ export function toastifyDespesas(){
                 <input id="inp-descricao" type="text">
 
                 <label for="inp-valor-despesa">Custo da Despesa</label>
-                <input id="inp-valor-despesa" type="text">
+                <input id="inp-valor-despesa" type="number">
             
                 <button id="btn-cadastrar-despesa">Cadastrar Despesa</button>
             </form>

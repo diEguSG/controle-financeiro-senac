@@ -43,28 +43,28 @@ function atualizaData(){
         const mesInicial = dataInicial.slice(5, 7)
         const diaInicial = dataInicial.slice(8, 10)
 
-        carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFinal, diaInicial)
-
+        carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFinal, diaInicial);
     })
 }
 
 async function carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFinal, diaInicial){
 
-    const dadosMesFinal = await fetch(`${baseURL}/venda?ano=${mesFinal}`)
-    const dadosMesInicial = await fetch(`${baseURL}/venda?ano=${mesInicial}`)
-
-    const dadosMesFinalJson = await dadosMesFinal.json();
-    const dadosMesInicialJson = await dadosMesInicial.json();
-
     let dados = []; 
     if(anoFinal - anoInicial == 0){
+        
         const dadosAnual = await fetch(`${baseURL}/venda?ano=${anoFinal}`);
         const dadosAnualJson = await dadosAnual.json();
 
         if(mesFinal - mesInicial == 0){
+            
             for(let i = 0; i < dadosAnualJson.length; i++){
                 if(dadosAnualJson[i].mes == mesFinal){
-                    if(dadosAnualJson[i].dia == diaFinal){     
+                    if(diaFinal - diaInicial == 0){ 
+                        if(dadosAnualJson[i].dia == diaFinal){     
+                            dados.push(dadosAnualJson[i]) 
+                        }  
+                    }
+                    else if (dadosAnualJson[i].dia <= diaFinal){
                         dados.push(dadosAnualJson[i]) 
                     }
                 }
@@ -84,11 +84,16 @@ async function carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFin
             const dadosAnual = await fetch(`${baseURL}/venda?ano=${i}`);
             const dadosAnualJson = await dadosAnual.json();  
                 
-
+            console.log(anoFinal);
             if(mesFinal - mesInicial == 0){
                 for(let i = 0; i < dadosAnualJson.length; i++){
                     if(dadosAnualJson[i].mes == mesFinal){
-                        if(dadosAnualJson[i].dia == diaFinal){     
+                        if(diaFinal - diaInicial == 0){ 
+                            if(dadosAnualJson[i].dia == diaFinal){     
+                                dados.push(dadosAnualJson[i]) 
+                            }  
+                        }
+                        else if (dadosAnualJson[i].dia <= diaFinal){
                             dados.push(dadosAnualJson[i]) 
                         }
                     }
@@ -103,18 +108,8 @@ async function carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFin
                 }
             }
         }
-    }
-
-    console.log(dados);
+    }   
     
-    dados.sort((a,b)=>{
-        console.log(a.id, b.id);
-
-        return a.id - b.id;
-    })
-    
-    console.log(dados)
-
     ulVendas.innerHTML = '';
 
     ulVendas.insertAdjacentHTML("beforeend", `
@@ -131,22 +126,101 @@ async function carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFin
 
     const table = document.querySelector("table");
 
-    dados.forEach(async (item)=>{
+    let lucro = 0;
+    let valorVendas = 0;
 
-        const produto = await fetch(`${baseURL}/produto?id=${item.id_produto}`);
+    for(let i = 0; i < dados.length; i++){
+        const produto = await fetch(`${baseURL}/produto?id=${dados[i].id_produto}`);
         const produtoJson = await produto.json();
-        
+
         table.insertAdjacentHTML('beforeend',`  
             <tr>
-                <td>${item.id}</td>
+                <td>${dados[i].id}</td>
                 <td>${produtoJson[0].descricao}</td>
-                <td>${item.quantidade}</td>
-                <td>${item.valorTotal}</td>
-                <td>${item.dia}/${item.mes}/${item.ano}</td>
+                <td>${dados[i].quantidade}</td>
+                <td>${dados[i].valorTotal}</td>
+                <td>${dados[i].dia}/${dados[i].mes}/${dados[i].ano}</td>
             </tr>
-        `);   
-    })        
+        `); 
+
+        lucro += (produtoJson[0].valorVenda - produtoJson[0].valorCusto) * dados[i].quantidade
+        
+
+        valorVendas += dados[i].valorTotal;
+    
+        if(i == (dados.length - 1)){
+            // console.log(valorVendas);
+            console.log(lucro);
+        }
+    }
 }
+
+// async function carregarDespesas(anoFinal, anoInicial, mesFinal, mesInicial, diaFinal, diaInicial){
+
+//     let dados = []; 
+//     if(anoFinal - anoInicial == 0){
+//         const dadosAnual = await fetch(`${baseURL}/despesa?ano=${anoFinal}`);
+//         const dadosAnualJson = await dadosAnual.json();
+
+//         if(mesFinal - mesInicial == 0){
+//             for(let i = 0; i < dadosAnualJson.length; i++){
+//                 if(dadosAnualJson[i].mes == mesFinal){
+                     
+//                         if(dadosAnualJson[i].dia == diaFinal){     
+//                             dados.push(dadosAnualJson[i]) 
+//                         }  
+                    
+                    
+//                 }
+//             }
+//         }else{
+//             for(let i = mesInicial; i <= mesFinal; i++){
+//                 for(let j = 0; j < dadosAnualJson.length; j++){
+//                     if(dadosAnualJson[j].mes == i){  
+//                         dados.push(dadosAnualJson[j])     
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     else{
+//         for(let i = anoInicial; i <= anoFinal; i++){
+//             const dadosAnual = await fetch(`${baseURL}/despesa?ano=${i}`);
+//             const dadosAnualJson = await dadosAnual.json();  
+                
+//             if(mesFinal - mesInicial == 0){
+//                 for(let i = 0; i < dadosAnualJson.length; i++){
+//                     if(dadosAnualJson[i].mes == mesFinal){
+//                         if(dadosAnualJson[i].dia == diaFinal){     
+//                             dados.push(dadosAnualJson[i]) 
+//                         }
+//                         else if (dadosAnualJson[i].dia < diaFinal){
+//                             dados.push(dadosAnualJson[i]) 
+//                         }
+//                     }
+//                 }
+//             }else{
+//                 for(let i = mesInicial; i <= mesFinal; i++){
+//                     for(let j = 0; j < dadosAnualJson.length; j++){
+//                         if(dadosAnualJson[j].mes == i){  
+//                             dados.push(dadosAnualJson[j])  
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     } 
+
+//     let valorDespesas = 0;
+
+//     for(let i = 0; i < dados.length; i++){
+//         valorDespesas += dados[i].valorDespesa;
+
+//         if(i == dados.length - 1){
+//             carregarVendas(anoFinal, anoInicial, mesFinal, mesInicial, diaFinal, diaInicial, valorDespesas)
+//         }
+//     }
+// }
 
 dataAtual();
 atualizaData();
