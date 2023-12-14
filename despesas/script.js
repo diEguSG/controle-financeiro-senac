@@ -32,7 +32,7 @@ async function carregarDespesas(){
         ulDespesas.insertAdjacentHTML('beforeend',` 
             <li>
                 <div class="div-despesas">
-                    <h3>Despesas Mensal</h3>
+                    <h3>Despesas Mensais</h3>
                     <p id="p-descricao">Descrição: ${item.descricao}</p>
                     <p id="p-valorDespesa">Valor: ${item.valorDespesa}</p>
                     <p id="p-data">Data: ${item.dia}/${item.mes}/${item.ano}</p>
@@ -45,7 +45,7 @@ async function carregarDespesas(){
         <button id="btn-abrir-cadastro">Cadastro Despesas</button>
     `);
 
-    const divDespesas = document.querySelector(".div-despesas");
+    const divDespesas = document.querySelector("ul");
     const btnAbrirCadastro = document.querySelector("#btn-abrir-cadastro");
 
     btnAbrirCadastro.addEventListener('click', ()=>{

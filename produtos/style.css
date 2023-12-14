@@ -4,50 +4,71 @@
     padding: 0;
 }
 
-/* ul{
+header{
+    background-color: rgb(78, 78, 78);
+}
+
+header nav ul{
     display: flex;
-    flex-wrap: wrap;
-    max-width: 900px;
-    margin: 0 auto;
-    gap: 8px;
-    animation: ulAnimation 1s ease;
-    padding: 32px 0px;
-} */
-
-li{
-    list-style: none;
-    cursor: pointer;
-    /* display: flex;
     flex-direction: row;
-    border-radius: 5px;
-    background-color: #cfcfcf;
-    align-items: center;
+    gap: 20px;
+}
+
+header nav li{
+    list-style: none;
+    border-radius: 3px;
+    height: 35px;
+    cursor: pointer;
+    text-align: center;
+}
+
+header nav a{ 
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    text-align: center;
     justify-content: center;
-    max-width: 300px;
-    width: 110px;
-    margin: 0 auto;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #949494; */
-}
-
-.div-produtos{
 
 }
 
-li:hover{
+main{
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    height: 100vh;
+    
+}
+
+main ul{
+    display: flex;  
+    margin-top: 10px;
+    flex-wrap: wrap;
+    width: 700px;
+    height: 0;
+}
+
+main li{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin-top: 5px;
+    margin-left: 25px;
+    cursor: pointer;
+    width: 150px;
+    border: 1px solid #000;
+    flex-basis: 33.333333%;
+    max-width: max-content;
+}
+
+nav li:hover{
+    background-color: #d40707;
+}
+
+main li:hover{
     transform: scale(1.01);
     transition: all 0.3s ease;
 }
 
-
 img{
     width: 20px;
-}
-
-#btn-fechar-modal{
-    position: absolute;
-    top: 0;
-    margin-top: 260px;
-    margin-left: 200px;
 }

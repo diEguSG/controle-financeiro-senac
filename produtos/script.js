@@ -1,4 +1,3 @@
-import {toastifyProdutos} from './toastifyProdutos.js';
 import {baseURL} from "../api.js";
 
 carregarProdutos();
@@ -7,6 +6,7 @@ const myHeaders = {
     "Content-Type": "application/json"
 }
 
+const nav = document.querySelector("nav")
 const main = document.querySelector("main")
 const ul = document.createElement('ul')
 main.appendChild(ul);
@@ -20,7 +20,7 @@ async function carregarProdutos(){
 
     dadosJson.forEach((item)=>{
         
-        ulProdutos.insertAdjacentHTML("beforebegin",` 
+        ulProdutos.insertAdjacentHTML("beforeend",` 
             <li>
                 <form class="form-produtos">
                     <div class="div-produtos">
@@ -43,15 +43,23 @@ async function carregarProdutos(){
         })
     })
 
-    main.insertAdjacentHTML("afterbegin", `
-        <button id="btn-abrir-cadastro">Cadastro Produto</button>
+    nav.insertAdjacentHTML("afterbegin", `
+        <ul>
+            <li>
+                <a id="btn-aba-Produtos" class="btn-nav-produtos">Produtos</a>
+            </li>
+            <li>
+                <a id="btn-abrir-cadastro" class="btn-nav-produtos">Cadastro Produto</a>
+            </li>
+        </ul>
     `);
 
     const btnAbrirCadastro = document.querySelector("#btn-abrir-cadastro");
-    const formProdutos = document.querySelector(".form-produtos");
 
     btnAbrirCadastro.addEventListener('click', ()=>{
-        toastifyProdutos(formProdutos, btnAbrirCadastro);
+        setTimeout(()=>{
+            window.location.replace("/produtos/cadastroProdutos/index.html");
+        }, 300);
     });
  
 }
