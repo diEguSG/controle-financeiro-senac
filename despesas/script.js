@@ -1,8 +1,8 @@
-import {toastifyDespesas} from './toastifyDespesas.js';
 import {baseURL} from "../api.js";
 
 carregarDespesas();
 
+const nav = document.querySelector("nav")
 const main = document.querySelector("main")
 const ul = document.createElement('ul')
 main.appendChild(ul);
@@ -30,9 +30,9 @@ async function carregarDespesas(){
     dadosVenda.forEach((item)=>{
         
         ulDespesas.insertAdjacentHTML('beforeend',` 
+        
             <li>
                 <div class="div-despesas">
-                    <h3>Despesas Mensais</h3>
                     <p id="p-descricao">Descrição: ${item.descricao}</p>
                     <p id="p-valorDespesa">Valor: ${item.valorDespesa}</p>
                     <p id="p-data">Data: ${item.dia}/${item.mes}/${item.ano}</p>
@@ -41,14 +41,22 @@ async function carregarDespesas(){
         `);
     })
 
-    main.insertAdjacentHTML("afterbegin", `
-        <button id="btn-abrir-cadastro">Cadastro Despesas</button>
+    nav.insertAdjacentHTML("afterbegin", `
+        <ul>
+            <li>
+                <a id="btn-aba-despesas" class="btn-nav-despesas">Despesas</a>
+            </li>
+            <li>
+                <a id="btn-abrir-cadastro" class="btn-nav-produtos">Cadastro de Desepesas</a>
+            </li>
+        </ul>
     `);
 
-    const divDespesas = document.querySelector("ul");
     const btnAbrirCadastro = document.querySelector("#btn-abrir-cadastro");
 
     btnAbrirCadastro.addEventListener('click', ()=>{
-        toastifyDespesas(divDespesas, btnAbrirCadastro);
+        setTimeout(()=>{
+            window.location.replace("/despesas/cadastroDespesas/index.html");
+        }, 300);
     })
 }

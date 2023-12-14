@@ -46,7 +46,7 @@ async function carregarProdutos(){
     nav.insertAdjacentHTML("afterbegin", `
         <ul>
             <li>
-                <a id="btn-aba-Produtos" class="btn-nav-produtos">Produtos</a>
+                <a id="btn-aba-produtos" class="btn-nav-produtos">Produtos</a>
             </li>
             <li>
                 <a id="btn-abrir-cadastro" class="btn-nav-produtos">Cadastro Produto</a>

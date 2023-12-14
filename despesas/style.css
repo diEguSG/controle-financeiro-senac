@@ -4,13 +4,69 @@
     padding: 0;
 }
 
-li{
-    list-style: none;
-    cursor: pointer;
+header{
+    background-color: rgb(78, 78, 78);
 }
 
-.div-produtos{
+header nav ul{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+header nav li{
+    list-style: none;
+    border-radius: 3px;
+    height: 35px;
+    cursor: pointer;
+    text-align: center;
+}
+
+header nav a{ 
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    text-align: center;
+    justify-content: center;
+
+}
+
+main{
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    height: 100vh;
     
+}
+
+main ul{
+    display: flex;  
+    margin-top: 10px;
+    flex-wrap: wrap;
+    width: 700px;
+    height: 0;
+}
+
+main li{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin-top: 5px;
+    margin-left: 25px;
+    cursor: pointer;
+    width: 150px;
+    border: 1px solid #000;
+    flex-basis: 33.333333%;
+    max-width: max-content;
+}
+
+nav li:hover{
+    background-color: #d40707;
+}
+
+main li:hover{
+    transform: scale(1.01);
+    transition: all 0.3s ease;
 }
 
 #btn-fechar-modal{
